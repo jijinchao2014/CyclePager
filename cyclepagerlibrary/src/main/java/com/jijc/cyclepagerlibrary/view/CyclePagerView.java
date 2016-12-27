@@ -33,7 +33,7 @@ import java.util.TimerTask;
  * 3.startRoll(...) 开启自动轮播，自动轮播间隔时间（单位：毫秒） 设置为0时不自动轮播<br/>
  * 4.stopRoll(...) 停止自动轮播、有特殊要求的情况下可以使用此方法<br/>
  * Created by jijc on 2016/12/21. <br/>
- * PackageName: com.jijc.cyclepagerview.view <br/>
+ * PackageName: com.jijc.cyclepagerlibrary.view <br/>
  */
 public class CyclePagerView<T> extends ViewPager {
     private LinearLayout ll_pointer;
@@ -73,7 +73,7 @@ public class CyclePagerView<T> extends ViewPager {
     }
 
     /**
-     * CycleViewPager设置数据
+     * CyclePager设置数据
      * @param mContext 上下文
      * @param imgList 图片集合
      * @param layoutResId item的布局资源ID
@@ -194,7 +194,7 @@ public class CyclePagerView<T> extends ViewPager {
      */
     @Override
     public void setAdapter(PagerAdapter adapter) {
-        //假的监听 解决 cycleviewpager 不设置 OnPageChangeListener 时不修正 listener 的问题
+        //假的监听 解决 cyclepager 不设置 OnPageChangeListener 时不修正 listener 的问题
         addOnPageChangeListener(new SimpleOnPageChangeListener());
         InnerPagerAdapter innerPagerAdapter = new InnerPagerAdapter(adapter);
         super.setAdapter(innerPagerAdapter);
@@ -433,7 +433,7 @@ public class CyclePagerView<T> extends ViewPager {
      */
     public interface OnItemInitLisenter {
         /**
-         * 初始化CycleViewPager的item布局，将主动权交给开发者，开发者可以通过传入的布局资源初始化成view<br/>
+         * 初始化CyclePager的item布局，将主动权交给开发者，开发者可以通过传入的布局资源初始化成view<br/>
          * 这个方法将完成加载的view返回给开发者，从而可以方便的设置ViewPager的item的图片文字等
          *
          * @param view     通过传入的资源文件生成的view
@@ -442,7 +442,7 @@ public class CyclePagerView<T> extends ViewPager {
         void initItemView(View view, int position);
 
         /**
-         * CycleViewPager的item点击事件
+         * CyclePager的item点击事件
          *
          * @param position
          */
