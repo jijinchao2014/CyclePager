@@ -459,14 +459,14 @@ public class CyclePager<T> extends ViewPager {
         /**
          * CyclePager的item点击事件
          *
-         * @param position
+         * @param position 当前显示的索引，由0开始
          */
         void onItemClick(int position);
 
         /**
          * viewpager条目可见时调用，处理广告的曝光建议在此回调中进行
          *
-         * @param position
+         * @param position 当前显示的索引，由0开始
          */
         void onItemVisible(int position);
     }

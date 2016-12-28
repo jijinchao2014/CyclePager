@@ -39,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
         viewpager = (CyclePager) findViewById(R.id.viewpager);
         ll_point = (LinearLayout) findViewById(R.id.ll_point);
 //        viewpager.addPoints(mContext,R.drawable.bg_pointer,ll_point,ListUtils.getSize(imgList));
+        //设置指示点，如不需要可不调用
         viewpager.addPoints(mContext, R.drawable.bg_pointer1, ll_point, ListUtils.getSize(imgList));
-
+        //CyclePager设置数据,详情参考方法注释
         viewpager.setImages(mContext, imgList, R.layout.item_cycle_pager, new CyclePager.OnItemInitLisenter() {
             @Override
             public void initItemView(View view, int position) {
@@ -66,7 +67,9 @@ public class MainActivity extends AppCompatActivity {
 //                Log.w("jijinchao", "onItemVisible:postion------------" + position);
             }
         }, 6);
+        //设置切换效果，如果想使用默认效果则不必设置
         viewpager.setPageTransformer(new DepthPageTransformer());
+        //开启自动轮播并设置轮播间隔，如不需要可不调用
         viewpager.startRoll(3000);
     }
 
