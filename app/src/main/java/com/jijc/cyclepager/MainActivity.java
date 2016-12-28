@@ -12,14 +12,15 @@ import android.widget.Toast;
 
 import com.jijc.cyclepager.util.DisplayImageOptionsCfg;
 import com.jijc.cyclepager.util.ImageLoader;
+import com.jijc.cyclepagerlibrary.commen.DepthPageTransformer;
 import com.jijc.cyclepagerlibrary.util.ListUtils;
-import com.jijc.cyclepagerlibrary.view.CyclePagerView;
+import com.jijc.cyclepagerlibrary.view.CyclePager;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CyclePagerView viewpager;
+    private CyclePager viewpager;
     private ArrayList<String> imgList = new ArrayList<>();
     private Context mContext;
     private LinearLayout ll_point;
@@ -35,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
         imgList.add("http://img6.pplive.cn/2012/09/04/16593329013.jpg");
         imgList.add("http://img6.pplive.cn/2012/05/08/15004210091.jpg");
         imgList.add("http://pic2.ooopic.com/12/11/23/11bOOOPIC21_1024.jpg");
-        viewpager = (CyclePagerView) findViewById(R.id.viewpager);
+        viewpager = (CyclePager) findViewById(R.id.viewpager);
         ll_point = (LinearLayout) findViewById(R.id.ll_point);
 //        viewpager.addPoints(mContext,R.drawable.bg_pointer,ll_point,ListUtils.getSize(imgList));
-
         viewpager.addPoints(mContext, R.drawable.bg_pointer1, ll_point, ListUtils.getSize(imgList));
-        viewpager.setImages(mContext, imgList, R.layout.item_cycle_pager, new CyclePagerView.OnItemInitLisenter() {
+
+        viewpager.setImages(mContext, imgList, R.layout.item_cycle_pager, new CyclePager.OnItemInitLisenter() {
             @Override
             public void initItemView(View view, int position) {
 
@@ -64,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemVisible(int position) {
 //                Log.w("jijinchao", "onItemVisible:postion------------" + position);
             }
-        }, 7);
-
+        }, 6);
+        viewpager.setPageTransformer(new DepthPageTransformer());
         viewpager.startRoll(3000);
     }
 

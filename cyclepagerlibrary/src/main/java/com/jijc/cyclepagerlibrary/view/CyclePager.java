@@ -1,6 +1,5 @@
 package com.jijc.cyclepagerlibrary.view;
 
-import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
 
-import com.jijc.cyclepagerlibrary.commen.DepthPageTransformer;
 import com.jijc.cyclepagerlibrary.util.UIUtils;
 
 import java.lang.reflect.Field;
@@ -27,15 +25,16 @@ import java.util.TimerTask;
 
 /**
  * Description:可以无限轮播的ViewPager<br/>
- * CycleViewPager暴露了三个方法：<br/>
+ * CyclePager暴露了5个方法：<br/>
  * 1.addPoints(...) 表示添加指示点，不调用则不添加；如果要添加指示点，需要在布局文件中使用LinearLayout占位，然后调用此方法。<br/>
  * 2.setImages(...) 设置数据源、条目的布局等。详情参考该方法注释。<br/>
- * 3.startRoll(...) 开启自动轮播，自动轮播间隔时间（单位：毫秒） 设置为0时不自动轮播<br/>
- * 4.stopRoll(...) 停止自动轮播、有特殊要求的情况下可以使用此方法<br/>
+ * 3.startRoll(...) 开启自动轮播，自动轮播间隔时间（单位：毫秒） 设置为0时不自动轮播。<br/>
+ * 4.stopRoll(...) 停止自动轮播、有特殊要求的情况下可以使用此方法。<br/>
+ * 5.setPageTransformer(...) 设置ViewPager切换效果，开发者可自定义切换效果。<br/>
  * Created by jijc on 2016/12/21. <br/>
  * PackageName: com.jijc.cyclepagerlibrary.view <br/>
  */
-public class CyclePagerView<T> extends ViewPager {
+public class CyclePager<T> extends ViewPager {
     private LinearLayout ll_pointer;
     private Timer mTimer;
     private Context mContext;
@@ -48,15 +47,14 @@ public class CyclePagerView<T> extends ViewPager {
     private long millisecond; //viewpager滚动间隔时间
     private boolean isRunnin;
     private int lastPos;
-    private Animator pagerAnimation;
 
-    public CyclePagerView(Context context) {
+    public CyclePager(Context context) {
         super(context);
         mContext = context;
         postInitViewPager();
     }
 
-    public CyclePagerView(Context context, AttributeSet attrs) {
+    public CyclePager(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
         postInitViewPager();
@@ -64,6 +62,7 @@ public class CyclePagerView<T> extends ViewPager {
 
     /**
      * 设置ViewPager动画的持续时间<br/>
+     *
      * @param scrollFactor 滚动系数 0表示没有滚动效果，值越大滚动越慢
      */
     private void setScrollDurationFactor(double scrollFactor) {
@@ -74,11 +73,12 @@ public class CyclePagerView<T> extends ViewPager {
 
     /**
      * CyclePager设置数据
-     * @param mContext 上下文
-     * @param imgList 图片集合
-     * @param layoutResId item的布局资源ID
-     * @param lisenter item的监听
-     * @param scrollDurationRatio  viewpager自动切换的时间系数：0 表示无滚动效果，数值越大滚动越慢
+     *
+     * @param mContext            上下文
+     * @param imgList             图片集合
+     * @param layoutResId         item的布局资源ID
+     * @param lisenter            item的监听
+     * @param scrollDurationRatio viewpager自动切换的时间系数：0 表示无滚动效果，数值越大切换越慢
      */
     public void setImages(final Context mContext, final ArrayList<T> imgList, final int layoutResId, final OnItemInitLisenter lisenter, int scrollDurationRatio) {
         this.mOnItemInitLisenter = lisenter;
@@ -142,7 +142,7 @@ public class CyclePagerView<T> extends ViewPager {
                     pointer.setEnabled(false);
                 }
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                params.rightMargin = UIUtils.dip2px(mContext,8);
+                params.rightMargin = UIUtils.dip2px(mContext, 8);
                 ll_point.addView(pointer, params);
             }
         }
@@ -154,7 +154,9 @@ public class CyclePagerView<T> extends ViewPager {
      * @param millisecond 自动轮播间隔时间（单位：毫秒） 设置为0时不自动轮播
      */
     public void startRoll(long millisecond) {
-        if (millisecond<1){return;}
+        if (millisecond < 1) {
+            return;
+        }
         this.millisecond = millisecond;
         isRunnin = true;
         //只有一张图片时不滚动
@@ -188,6 +190,19 @@ public class CyclePagerView<T> extends ViewPager {
     }
 
     /**
+     * 设置pager的切换效果，不调用此方法则使用默认的切换效果<br/>
+     * 本库提供了两种切换方式：<br/>
+     * 1.DepthPageTransformer 等比放大缩小+改变透明度变换<br/>
+     * 2.ZoomOutPageTransformer 等比放大缩小<br/>
+     *
+     * @param transformer 切换的效果, 处理默认提供的方式, 开发者如果要其他效果, 可参考:<br/>
+     *                    "https://github.com/AndroidMsky/ViewPagerAnimation", 感谢AndroidMsky的分享
+     */
+    public void setPageTransformer(PageTransformer transformer) {
+        setPageTransformer(true, transformer);
+    }
+
+    /**
      * 矫正adapter
      *
      * @param adapter
@@ -205,9 +220,9 @@ public class CyclePagerView<T> extends ViewPager {
 
         /**
          * viewpager 切换的动画 更多动画参考：https://github.com/jijinchao2014/ViewPagerAnimation
-         * 该库来源于AndroidMsky  对其表示感谢
+         * 感谢AndroidMsky的分享
          */
-        setPageTransformer(true, new DepthPageTransformer());
+//        setPageTransformer(true, new DepthPageTransformer());
 //        setPageTransformer(true, new ZoomOutPageTransformer());
     }
 
@@ -232,7 +247,7 @@ public class CyclePagerView<T> extends ViewPager {
                 downX = ev.getX();
                 downY = ev.getY();
                 downTime = SystemClock.uptimeMillis();
-                if (isRunnin){
+                if (isRunnin) {
                     stopRoll();
                 }
                 break;
@@ -321,7 +336,7 @@ public class CyclePagerView<T> extends ViewPager {
 
             //选中的指示点和非选中的指示点如果大小不同时需要重新设置LayoutParams
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-2, -2);
-            params.rightMargin = UIUtils.dip2px(mContext,8);
+            params.rightMargin = UIUtils.dip2px(mContext, 8);
             if (lastChild != null) {
                 lastChild.setLayoutParams(params);
                 lastChild.setEnabled(false);
@@ -344,9 +359,9 @@ public class CyclePagerView<T> extends ViewPager {
 
             if (state == ViewPager.SCROLL_STATE_IDLE) {
                 if (position == getAdapter().getCount() - 1) {
-                    CyclePagerView.this.setCurrentItem(1, false);
+                    CyclePager.this.setCurrentItem(1, false);
                 } else if (position == 0) {
-                    CyclePagerView.this.setCurrentItem(getAdapter().getCount() - 2, false);
+                    CyclePager.this.setCurrentItem(getAdapter().getCount() - 2, false);
                 }
             }
             if (listener != null) {
