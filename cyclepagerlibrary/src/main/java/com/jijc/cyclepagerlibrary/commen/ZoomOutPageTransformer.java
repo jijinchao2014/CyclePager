@@ -6,9 +6,9 @@ import android.util.Log;
 import android.view.View;
 
 /**
- * Description:
+ * Description:切换效果
  * Created by jijc on 2016/12/22.
- * PackageName: com.jijc.viewdemo.view
+ * PackageName: com.jijc.cyclepagerlibrary.commen
  */
 public class ZoomOutPageTransformer implements ViewPager.PageTransformer{
     private static final float MIN_SCALE = 0.85f;

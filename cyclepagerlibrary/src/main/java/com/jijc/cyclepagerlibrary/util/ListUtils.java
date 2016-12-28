@@ -3,7 +3,9 @@ package com.jijc.cyclepagerlibrary.util;
 import java.util.List;
 
 /**
- * Created by zhou on 14-3-17.
+ * Description:List工具类
+ * Created by jijc on 2016/12/22.
+ * PackageName: com.jijc.cyclepagerlibrary.util
  */
 public class ListUtils {
     /**
