@@ -1,6 +1,4 @@
-
 # CyclePager：自定义的ViewPager
------
 
 ### 主要功能点
 * 支持无限轮播;
