@@ -356,14 +356,14 @@ public class CyclePager<T> extends ViewPager {
 
         @Override
         public void onPageScrollStateChanged(int state) {
-
-            if (state == ViewPager.SCROLL_STATE_IDLE) {
+                //这个判断会使手动滑动到边界条目的时候卡顿
+//            if (state == ViewPager.SCROLL_STATE_IDLE) {
                 if (position == getAdapter().getCount() - 1) {
                     CyclePager.this.setCurrentItem(1, false);
                 } else if (position == 0) {
                     CyclePager.this.setCurrentItem(getAdapter().getCount() - 2, false);
                 }
-            }
+//            }
             if (listener != null) {
                 listener.onPageScrollStateChanged(state);
             }
