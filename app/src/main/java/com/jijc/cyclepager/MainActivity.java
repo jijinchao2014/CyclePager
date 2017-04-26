@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemVisible(int position) {
-//                Log.w("jijinchao", "onItemVisible:postion------------" + position);
+                Log.w("jijinchao", "onItemVisible:postion------------" + position);
             }
         }, 6);
         //设置切换效果，如果想使用默认效果则不必设置

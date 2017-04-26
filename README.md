@@ -9,6 +9,15 @@
 * 按住停止轮播;
 * 抬手继续的功能
 
+### 更新日志
+####【2.0.1】
+-处理onItemVisible(...)广告曝光以第一和最后一个重复曝光问题
+####【2.0.0】
+-解决滑动到边界条目卡顿的问题
+####【1.0.0】
+-Bintray账号冲突问题，另一个账号的同版本覆盖了
+
+
 ### 实现效果
  截得图片比较卡顿，实际效果很流畅滴。
 
@@ -17,7 +26,7 @@
 ### 如何使用
 1.在项目的build.gradle中添加依赖(或者把<a href = "https://github.com/jijinchao2014/CyclePager"><b>代码下载</b></a>后将关键代码复制到自己的项目中)：
 
-	 compile 'com.jijc.cyclepager:cyclepagerlibrary:2.0.0'
+	 compile 'com.jijc.cyclepager:cyclepagerlibrary:2.0.1'
 2.布局文件中使用CyclePager
 
     <com.jijc.cyclepagerlibrary.view.CyclePager
