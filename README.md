@@ -17,7 +17,7 @@
 ### 如何使用
 1.在项目的build.gradle中添加依赖(或者把<a href = "https://github.com/jijinchao2014/CyclePager"><b>代码下载</b></a>后将关键代码复制到自己的项目中)：
 
-	 compile 'com.jijc.cyclepager:cyclepagerlibrary:1.0.0'
+	 compile 'com.jijc.cyclepager:cyclepagerlibrary:2.0.0'
 2.布局文件中使用CyclePager
 
     <com.jijc.cyclepagerlibrary.view.CyclePager
