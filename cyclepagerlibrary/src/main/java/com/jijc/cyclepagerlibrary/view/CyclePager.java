@@ -454,7 +454,9 @@ public class CyclePager<T> extends ViewPager {
     public interface OnItemInitLisenter {
         /**
          * 初始化CyclePager的item布局，将主动权交给开发者，开发者可以通过传入的布局资源初始化成view<br/>
-         * 这个方法将完成加载的view返回给开发者，从而可以方便的设置ViewPager的item的图片文字等
+         * 这个方法将完成加载的view返回给开发者，从而可以方便的设置ViewPager的item的图片文字等<br/>
+         * 需要注意的是，这个方法要考虑ViewPager的预加载，如果不是Item里面的布局（actvity或者fragment中的布局），为<br/>
+         * 控件设置数据时使用onItemVisible(...)方法。
          *
          * @param view     通过传入的资源文件生成的view
          * @param position 当前的位置

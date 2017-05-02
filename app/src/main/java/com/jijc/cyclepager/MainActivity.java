@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 ImageView iv_img = (ImageView) view.findViewById(R.id.iv_img);
                 TextView tv_play_count = (TextView) view.findViewById(R.id.tv_play_count);
                 tv_play_count.setText("这是第" + (position + 1) + "个图片");
+//                Log.w("jijinchao", "initItemView:postion------------" + (position+1));
                 Object tag = iv_img.getTag();
                 if (tag == null || !TextUtils.equals((String) tag, imgList.get(position))) {
                     ImageLoader.loadImageAsync(iv_img, imgList.get(position), DisplayImageOptionsCfg.getInstance().getOptions(R.mipmap.item_live_bg));
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemVisible(int position) {
-                Log.w("jijinchao", "onItemVisible:postion------------" + position);
+//                Log.w("jijinchao", "onItemVisible:postion------------" + position);
             }
         }, 6);
         //设置切换效果，如果想使用默认效果则不必设置
