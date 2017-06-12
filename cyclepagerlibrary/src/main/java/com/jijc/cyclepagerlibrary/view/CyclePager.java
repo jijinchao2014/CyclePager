@@ -26,15 +26,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Description:可以无限轮播的ViewPager<br/>
- * CyclePager暴露了5个方法：<br/>
- * 1.addPoints(...) 表示添加指示点，不调用则不添加；如果要添加指示点，需要在布局文件中使用LinearLayout占位，然后调用此方法。<br/>
- * 2.setImages(...) 设置数据源、条目的布局等。详情参考该方法注释。<br/>
- * 3.startRoll(...) 开启自动轮播，自动轮播间隔时间（单位：毫秒） 设置为0时不自动轮播。<br/>
- * 4.stopRoll(...) 停止自动轮播、有特殊要求的情况下可以使用此方法。<br/>
- * 5.setPageTransformer(...) 设置ViewPager切换效果，开发者可自定义切换效果。<br/>
- * Created by jijc on 2016/12/21. <br/>
- * PackageName: com.jijc.cyclepagerlibrary.view <br/>
+ * Description:可以无限轮播的ViewPager<br>
+ * CyclePager暴露了5个方法：<br>
+ * 1.addPoints(...) 表示添加指示点，不调用则不添加；如果要添加指示点，需要在布局文件中使用LinearLayout占位，然后调用此方法。<br>
+ * 2.setImages(...) 设置数据源、条目的布局等。详情参考该方法注释。<br>
+ * 3.startRoll(...) 开启自动轮播，自动轮播间隔时间（单位：毫秒） 设置为0时不自动轮播。<br>
+ * 4.stopRoll(...) 停止自动轮播、有特殊要求的情况下可以使用此方法。<br>
+ * 5.setPageTransformer(...) 设置ViewPager切换效果，开发者可自定义切换效果。<br>
+ * Created by jijc on 2016/12/21. <br>
+ * PackageName: com.jijc.cyclepagerlibrary.view <br>
  */
 public class CyclePager<T> extends ViewPager {
     private LinearLayout ll_pointer;
@@ -63,7 +63,7 @@ public class CyclePager<T> extends ViewPager {
     }
 
     /**
-     * 设置ViewPager动画的持续时间<br/>
+     * 设置ViewPager动画的持续时间<br>
      *
      * @param scrollFactor 滚动系数 0表示没有滚动效果，值越大滚动越慢
      */
@@ -194,12 +194,12 @@ public class CyclePager<T> extends ViewPager {
     }
 
     /**
-     * 设置pager的切换效果，不调用此方法则使用默认的切换效果<br/>
-     * 本库提供了两种切换方式：<br/>
-     * 1.DepthPageTransformer 等比放大缩小+改变透明度变换<br/>
-     * 2.ZoomOutPageTransformer 等比放大缩小<br/>
+     * 设置pager的切换效果，不调用此方法则使用默认的切换效果<br>
+     * 本库提供了两种切换方式：<br>
+     * 1.DepthPageTransformer 等比放大缩小+改变透明度变换<br>
+     * 2.ZoomOutPageTransformer 等比放大缩小<br>
      *
-     * @param transformer 切换的效果, 处理默认提供的方式, 开发者如果要其他效果, 可参考:<br/>
+     * @param transformer 切换的效果, 处理默认提供的方式, 开发者如果要其他效果, 可参考:<br>
      *                    "https://github.com/AndroidMsky/ViewPagerAnimation", 感谢AndroidMsky的分享
      */
     public void setPageTransformer(PageTransformer transformer) {
@@ -223,7 +223,7 @@ public class CyclePager<T> extends ViewPager {
 //        setScrollDurationFactor(0);
 
         /**
-         * viewpager 切换的动画 更多动画参考：https://github.com/jijinchao2014/ViewPagerAnimation
+         * viewpager 切换的动画 更多动画参考：https://github.com/AndroidMsky/ViewPagerAnimation
          * 感谢AndroidMsky的分享
          */
 //        setPageTransformer(true, new DepthPageTransformer());
@@ -457,9 +457,9 @@ public class CyclePager<T> extends ViewPager {
      */
     public interface OnItemInitLisenter {
         /**
-         * 初始化CyclePager的item布局，将主动权交给开发者，开发者可以通过传入的布局资源初始化成view<br/>
-         * 这个方法将完成加载的view返回给开发者，从而可以方便的设置ViewPager的item的图片文字等<br/>
-         * 需要注意的是，这个方法要考虑ViewPager的预加载，如果不是Item里面的布局（actvity或者fragment中的布局），为<br/>
+         * 初始化CyclePager的item布局，将主动权交给开发者，开发者可以通过传入的布局资源初始化成view<br>
+         * 这个方法将完成加载的view返回给开发者，从而可以方便的设置ViewPager的item的图片文字等<br>
+         * 需要注意的是，这个方法要考虑ViewPager的预加载，如果不是Item里面的布局（actvity或者fragment中的布局），为<br>
          * 控件设置数据时使用onItemVisible(...)方法。
          *
          * @param view     通过传入的资源文件生成的view
