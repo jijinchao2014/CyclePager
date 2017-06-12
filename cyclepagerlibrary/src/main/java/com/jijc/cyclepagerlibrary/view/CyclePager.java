@@ -127,25 +127,27 @@ public class CyclePager<T> extends ViewPager {
      * @param size     列表里的个数
      */
     public void addPoints(Context mContext, int drawable, LinearLayout ll_point, int size) {
-        ll_pointer = ll_point;
-        //只有一张图片时不显示指示点
-        if (size < 2) {
-            ll_point.setVisibility(GONE);
-        } else {
-            ll_point.setVisibility(VISIBLE);
-            for (int i = 0; i < size; i++) {
-                ImageView pointer = new ImageView(mContext);
-                pointer.setBackgroundResource(drawable);
+        if (ll_point != null) {
+            ll_pointer = ll_point;
+            //只有一张图片时不显示指示点
+            if (size < 2) {
+                ll_point.setVisibility(GONE);
+            } else {
+                ll_point.setVisibility(VISIBLE);
+                for (int i = 0; i < size; i++) {
+                    ImageView pointer = new ImageView(mContext);
+                    pointer.setBackgroundResource(drawable);
 
-                //第一个点选中
-                if (i == 0) {
-                    pointer.setEnabled(true);
-                } else {
-                    pointer.setEnabled(false);
+                    //第一个点选中
+                    if (i == 0) {
+                        pointer.setEnabled(true);
+                    } else {
+                        pointer.setEnabled(false);
+                    }
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params.rightMargin = UIUtils.dip2px(mContext, 8);
+                    ll_point.addView(pointer, params);
                 }
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                params.rightMargin = UIUtils.dip2px(mContext, 8);
-                ll_point.addView(pointer, params);
             }
         }
     }
@@ -334,20 +336,22 @@ public class CyclePager<T> extends ViewPager {
             }
 
 //            Log.w("jijinchao", "-----pos:" + position + "------count:" + getAdapter().getCount());
-            View lastChild = ll_pointer.getChildAt(lastPos);
+            if (ll_pointer != null){
+                View lastChild = ll_pointer.getChildAt(lastPos);
 
-            //选中的指示点和非选中的指示点如果大小不同时需要重新设置LayoutParams
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-2, -2);
-            params.rightMargin = UIUtils.dip2px(mContext, 8);
-            if (lastChild != null) {
-                lastChild.setLayoutParams(params);
-                lastChild.setEnabled(false);
-            }
-            View curChild = ll_pointer.getChildAt(position - 1);
-            if (curChild != null) {
-                curChild.setLayoutParams(params);
-                curChild.setEnabled(true);
+                //选中的指示点和非选中的指示点如果大小不同时需要重新设置LayoutParams
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-2, -2);
+                params.rightMargin = UIUtils.dip2px(mContext, 8);
+                if (lastChild != null) {
+                    lastChild.setLayoutParams(params);
+                    lastChild.setEnabled(false);
+                }
+                View curChild = ll_pointer.getChildAt(position - 1);
+                if (curChild != null) {
+                    curChild.setLayoutParams(params);
+                    curChild.setEnabled(true);
 
+                }
             }
             lastPos = position - 1;
 //            Log.w("jijinchao", "child******" + curChild);
