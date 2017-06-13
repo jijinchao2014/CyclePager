@@ -28,6 +28,7 @@ import java.util.TimerTask;
 /**
  * Description:可以无限轮播的ViewPager<br>
  * CyclePager暴露了5个方法：<br>
+ * 如果要实现画廊的效果可参考博客：http://blog.csdn.net/lisdye2/article/details/52315008（感谢作者Alex_MaHao）
  * 1.addPoints(...) 表示添加指示点，不调用则不添加；如果要添加指示点，需要在布局文件中使用LinearLayout占位，然后调用此方法。<br>
  * 2.setImages(...) 设置数据源、条目的布局等。详情参考该方法注释。<br>
  * 3.startRoll(...) 开启自动轮播，自动轮播间隔时间（单位：毫秒） 设置为0时不自动轮播。<br>
